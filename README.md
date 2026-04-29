@@ -75,16 +75,6 @@ En Windows PowerShell puedes usar `.\gradlew.bat` en lugar de `./gradlew`.
 - `app/src/main/res`: layouts, menus, drawables y strings
 - `app/src/main/AndroidManifest.xml`: permisos y configuracion de la aplicacion
 
-## Capturas de pantalla
-
-Anade tus imagenes en `docs/images/` y usa una estructura como esta:
-
-![Login](docs/images/login.png)
-![Descubrir](docs/images/discover.png)
-![Matches](docs/images/matches.png)
-![Chat](docs/images/chat.png)
-![Perfil](docs/images/profile.png)
-
 ## Licencia
 
 Este proyecto se distribuye bajo licencia **GNU GPL v3.0**.
