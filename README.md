@@ -1,11 +1,21 @@
-# ParejaFinder
+<p align="center">
+  <img src="Logo 512 x 512.png" alt="ParejaFinder logo" width="140" />
+</p>
 
-![Android](https://img.shields.io/badge/Android-App-3DDC84?logo=android&logoColor=white)
-![Java](https://img.shields.io/badge/Java-11-007396?logo=openjdk&logoColor=white)
-![Gradle](https://img.shields.io/badge/Gradle-Build-02303A?logo=gradle&logoColor=white)
-![License](https://img.shields.io/badge/License-GPLv3-blue.svg)
-![F-Droid Ready](https://img.shields.io/badge/F--Droid-Compatible-orange)
-![Backend](https://img.shields.io/badge/Auth-Backend%20propio-success)
+<h1 align="center">ParejaFinder</h1>
+
+<p align="center">
+  Aplicación Android de demostración para descubrimiento de perfiles, gestión de matches y chat entre usuarios.
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Android-App-3DDC84?logo=android&logoColor=white" alt="Android" />
+  <img src="https://img.shields.io/badge/Java-11-007396?logo=openjdk&logoColor=white" alt="Java 11" />
+  <img src="https://img.shields.io/badge/Gradle-Build-02303A?logo=gradle&logoColor=white" alt="Gradle" />
+  <img src="https://img.shields.io/badge/License-GPLv3-blue.svg" alt="GPLv3" />
+  <img src="https://img.shields.io/badge/F--Droid-Compatible-orange" alt="F-Droid compatible" />
+  <img src="https://img.shields.io/badge/Auth-Backend%20propio-success" alt="Backend propio" />
+</p>
 
 Aplicación Android de demostración para descubrimiento de perfiles, gestión de matches y chat entre usuarios, con un panel de administración incluido.
 
