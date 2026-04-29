@@ -80,3 +80,13 @@ En Windows PowerShell puedes usar `.\gradlew.bat` en lugar de `./gradlew`.
 
 - El proyecto no depende de Firebase ni de Google Services para autenticación.
 - El repositorio contiene licencia en `LICENSE`.
+
+## Capturas de pantalla
+
+Añade tus imágenes en `assets/screenshots/` y usa esta estructura:
+
+![Login](assets/screenshots/login.png)
+![Descubrir](assets/screenshots/discover.png)
+![Matches](assets/screenshots/matches.png)
+![Chat](assets/screenshots/chat.png)
+![Perfil](assets/screenshots/profile.png)
