@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 public class SessionManager {
     private static final String PREFS = "pareja_finder_prefs";
     private static final String KEY_EMAIL = "email";
+    private static final String KEY_AUTH_TOKEN = "auth_token";
 
     private final SharedPreferences preferences;
 
@@ -34,7 +35,18 @@ public class SessionManager {
         return !getEmail().trim().isEmpty();
     }
 
+    public void saveAuthToken(String token) {
+        preferences.edit().putString(KEY_AUTH_TOKEN, token == null ? "" : token).apply();
+    }
+
+    public String getAuthToken() {
+        return preferences.getString(KEY_AUTH_TOKEN, "");
+    }
+
     public void logout() {
-        preferences.edit().remove(KEY_EMAIL).apply();
+        preferences.edit()
+                .remove(KEY_EMAIL)
+                .remove(KEY_AUTH_TOKEN)
+                .apply();
     }
 }

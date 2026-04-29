@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -25,13 +27,11 @@ import com.aplicafran.parejafinder.ui.ChatFragment;
 import com.aplicafran.parejafinder.ui.DiscoverFragment;
 import com.aplicafran.parejafinder.ui.MatchesFragment;
 import com.aplicafran.parejafinder.ui.ProfileFragment;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class MainActivity extends AppCompatActivity implements
         DiscoverFragment.Callbacks,
@@ -49,8 +49,10 @@ public class MainActivity extends AppCompatActivity implements
     private AdminFragment adminFragment;
     private BottomNavigationView bottomNav;
     private TextView tvTopBanner;
-    private AdView adViewBanner;
-    private FirebaseAuth firebaseAuth;
+    private Button btnEntrar;
+    private OnlineAuthClient onlineAuthClient;
+    private final ExecutorService authExecutor = Executors.newSingleThreadExecutor();
+    private final Handler mainHandler = new Handler(Looper.getMainLooper());
     private int pendingChatCandidateId = -1;
     private String pendingChatCandidateName = "";
 
@@ -61,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements
 
         sessionManager = new SessionManager(this);
         repository = new ProfileRepository(AppDatabase.getInstance(this));
-        firebaseAuth = FirebaseAuth.getInstance();
+        onlineAuthClient = new OnlineAuthClient(BuildConfig.AUTH_BASE_URL);
         NotificationHelper.ensureChannel(this);
         requestNotificationPermissionIfNeeded();
         layoutAuth = findViewById(R.id.layoutAuth);
@@ -69,13 +71,7 @@ public class MainActivity extends AppCompatActivity implements
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
         tvTopBanner = findViewById(R.id.tvTopBanner);
-        adViewBanner = findViewById(R.id.adViewBanner);
-        Button btnEntrar = findViewById(R.id.btnEntrar);
-        MobileAds.initialize(this, initializationStatus -> {
-        });
-        if (adViewBanner != null) {
-            adViewBanner.loadAd(new AdRequest.Builder().build());
-        }
+        btnEntrar = findViewById(R.id.btnEntrar);
         bottomNav = findViewById(R.id.bottomNav);
         bottomNav.inflateMenu(R.menu.bottom_nav_menu);
         bottomNav.setOnItemSelectedListener(item -> {
@@ -115,14 +111,14 @@ public class MainActivity extends AppCompatActivity implements
                 Toast.makeText(this, R.string.error_password_requerida, Toast.LENGTH_SHORT).show();
                 return;
             }
-            loginWithFirebase(email, password);
+            loginWithOnlineBackend(email, password);
         });
 
-        if (firebaseAuth.getCurrentUser() != null && firebaseAuth.getCurrentUser().getEmail() != null) {
-            String email = firebaseAuth.getCurrentUser().getEmail();
+        if (sessionManager.isLoggedIn()) {
+            String email = sessionManager.getEmail();
             UserAccount account = repository.getUserProfile(email);
             if (account != null && account.isBlocked == 1) {
-                firebaseAuth.signOut();
+                sessionManager.logout();
                 Toast.makeText(this, R.string.error_usuario_bloqueado, Toast.LENGTH_SHORT).show();
                 showAuthArea();
                 parseNotificationIntent(getIntent());
@@ -235,7 +231,6 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void logout() {
         repository.setUserOnlineStatus(sessionManager.getEmail(), false);
-        firebaseAuth.signOut();
         sessionManager.logout();
         etEmail.setText("");
         etPassword.setText("");
@@ -331,25 +326,30 @@ public class MainActivity extends AppCompatActivity implements
         return email.contains("@") && email.contains(".") && email.length() >= 6;
     }
 
-    private void loginWithFirebase(String email, String password) {
-        firebaseAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, signInTask -> {
-                    if (signInTask.isSuccessful()) {
-                        onAuthenticationSuccess(email, password, false);
-                        return;
-                    }
-                    firebaseAuth.createUserWithEmailAndPassword(email, password)
-                            .addOnCompleteListener(this, signUpTask -> {
-                                if (signUpTask.isSuccessful()) {
-                                    onAuthenticationSuccess(email, password, true);
-                                } else {
-                                    Toast.makeText(this, R.string.error_credenciales_invalidas, Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                });
+    private void loginWithOnlineBackend(String email, String password) {
+        btnEntrar.setEnabled(false);
+        authExecutor.execute(() -> {
+            OnlineAuthClient.AuthResult authResult = onlineAuthClient.loginOrRegister(email, password);
+            mainHandler.post(() -> {
+                btnEntrar.setEnabled(true);
+                if (authResult.status == OnlineAuthClient.Status.LOGIN_SUCCESS) {
+                    onAuthenticationSuccess(email, password, false, authResult.token);
+                    return;
+                }
+                if (authResult.status == OnlineAuthClient.Status.REGISTER_SUCCESS) {
+                    onAuthenticationSuccess(email, password, true, authResult.token);
+                    return;
+                }
+                if (authResult.status == OnlineAuthClient.Status.INVALID_CREDENTIALS) {
+                    Toast.makeText(this, R.string.error_credenciales_invalidas, Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                Toast.makeText(this, "No se pudo conectar al backend.", Toast.LENGTH_SHORT).show();
+            });
+        });
     }
 
-    private void onAuthenticationSuccess(String email, String password, boolean justRegistered) {
+    private void onAuthenticationSuccess(String email, String password, boolean justRegistered, String authToken) {
         repository.upsertLocalUserAccount(
                 email,
                 password,
@@ -357,12 +357,13 @@ public class MainActivity extends AppCompatActivity implements
         );
         UserAccount account = repository.getUserProfile(email);
         if (account != null && account.isBlocked == 1) {
-            firebaseAuth.signOut();
+            sessionManager.logout();
             Toast.makeText(this, R.string.error_usuario_bloqueado, Toast.LENGTH_SHORT).show();
             return;
         }
         repository.setUserOnlineStatus(email, true);
         sessionManager.saveEmail(email);
+        sessionManager.saveAuthToken(authToken);
         if (justRegistered) {
             Toast.makeText(this, R.string.registro_confirmado, Toast.LENGTH_SHORT).show();
         }
@@ -414,5 +415,11 @@ public class MainActivity extends AppCompatActivity implements
         super.onNewIntent(intent);
         setIntent(intent);
         parseNotificationIntent(intent);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        authExecutor.shutdownNow();
     }
 }

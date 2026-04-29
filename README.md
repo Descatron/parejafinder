@@ -24,23 +24,22 @@ Aplicación Android de demostración para descubrimiento de perfiles, gestión d
 - Gradle
 - AndroidX + Material Components
 - Room (persistencia local)
-- Firebase Authentication
-- Google Services
-- AdMob
+- Backend propio (autenticación online por API REST)
 
 ## Requisitos
 
 - Android Studio (versión reciente con soporte para AGP 9.x)
 - JDK 11
 - SDK de Android (mínimo API 24)
-- Archivo de configuración de Firebase: `app/google-services.json`
+- URL de backend configurada en `BuildConfig.AUTH_BASE_URL` (`app/build.gradle`)
 
 ## Instalación y ejecución
 
 1. Clona el repositorio:
    - `git clone https://github.com/Descatron/parejafinder.git`
 2. Abre el proyecto en Android Studio.
-3. Verifica que exista `app/google-services.json`.
+3. Configura tu backend en `app/build.gradle`:
+   - `buildConfigField "String", "AUTH_BASE_URL", "\"https://tu-backend.com\""`
 4. Sincroniza Gradle.
 5. Ejecuta la app en emulador o dispositivo físico.
 
@@ -62,5 +61,5 @@ En Windows PowerShell puedes usar `.\gradlew.bat` en lugar de `./gradlew`.
 
 ## Notas
 
-- El proyecto incluye `google-services` y configuración para Firebase.
+- El proyecto no depende de Firebase ni de Google Services para autenticación.
 - El repositorio contiene licencia en `LICENSE`.
