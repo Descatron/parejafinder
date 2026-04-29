@@ -1,0 +1,157 @@
+<resources>
+    <string name="app_name">Pareja Finder</string>
+    <string name="auth_titulo">Bienvenido a Pareja Finder</string>
+    <string name="auth_hint_email">Tu email</string>
+    <string name="auth_hint_password">Contrasena</string>
+    <string name="auth_entrar">Entrar / Registrarme</string>
+    <string name="copyright_login">© 2026 Aplicafran. Todos los derechos reservados.</string>
+    <string name="admob_app_id">ca-app-pub-1808401817976022~7370928010</string>
+    <string name="admob_banner_unit_id">ca-app-pub-1808401817976022/6879453901</string>
+    <string name="error_email_requerido">Escribe un email valido.</string>
+    <string name="error_password_requerida">La contrasena debe tener al menos 6 caracteres.</string>
+    <string name="error_credenciales_invalidas">Email o contrasena incorrectos.</string>
+    <string name="error_usuario_bloqueado">Tu cuenta esta bloqueada. Contacta con el administrador.</string>
+    <string name="registro_confirmado">Cuenta creada correctamente.</string>
+    <string name="banner_bienvenida">Bienvenido, %1$s</string>
+    <string name="banner_publicidad">ESPACIO PUBLICITARIO</string>
+    <string name="titulo_descubrir">Descubrir perfiles</string>
+    <string name="titulo_matches">Mis matches</string>
+    <string name="titulo_perfil">Mi perfil</string>
+    <string name="hint_busqueda">Buscar por nombre o intereses</string>
+    <string name="edad_maxima_inicial">Edad máxima: 40 años</string>
+    <string name="edad_maxima">Edad máxima: %1$d años</string>
+    <string name="filtrar">Filtrar</string>
+    <string name="limpiar">Limpiar</string>
+    <string name="sin_resultados">No hay perfiles con esos filtros.</string>
+    <string name="sin_usuarios_disponibles">Aun no hay usuarios registrados en tu zona.</string>
+    <string name="detalle_perfil">%1$s, %2$d años\nCiudad: %3$s\nIntereses: %4$s</string>
+    <string name="accion_me_interesa">Me interesa</string>
+    <string name="accion_super_like">Super Like</string>
+    <string name="accion_descartar">Descartar</string>
+    <string name="cerrar">Cerrar</string>
+    <string name="match_confirmado">Has hecho match con %1$s.</string>
+    <string name="match_ya_existia">Ya habias hecho match con %1$s.</string>
+    <string name="super_like_confirmado">Has enviado un Super Like a %1$s.</string>
+    <string name="super_like_upgrade_confirmado">Has mejorado tu Like a Super Like para %1$s.</string>
+    <string name="super_like_ya_existia">Ya habias enviado un Super Like a %1$s.</string>
+    <string name="descartar_confirmado">Has descartado a %1$s.</string>
+    <string name="matches_vacio">Aun no tienes matches. Descubre perfiles.</string>
+    <string name="perfil_saludo">Hola, %1$s</string>
+    <string name="perfil_info">Desde aqui puedes ver y cerrar tu sesion local.</string>
+    <string name="perfil_email">Email: %1$s</string>
+    <string name="perfil_foto">Foto de perfil</string>
+    <string name="perfil_cambiar_foto">Seleccionar foto</string>
+    <string name="perfil_nombre_hint">Nombre visible</string>
+    <string name="perfil_edad_hint">Edad</string>
+    <string name="perfil_ciudad_hint">Ciudad</string>
+    <string name="perfil_bio_hint">Tu bio corta</string>
+    <string name="perfil_guardar">Guardar perfil</string>
+    <string name="perfil_guardado_ok">Perfil actualizado.</string>
+    <string name="perfil_error_guardado">No se pudo guardar el perfil.</string>
+    <string name="perfil_error_foto">No se pudo abrir la foto seleccionada.</string>
+    <string name="cerrar_sesion">Cerrar sesion</string>
+    <string name="sesion_cerrada">Sesion cerrada.</string>
+    <string name="matches_total">Total de matches: %1$d</string>
+    <string name="badge_like">LIKE</string>
+    <string name="badge_super_like">SUPER LIKE</string>
+    <string name="chat_titulo">Chat con %1$s</string>
+    <string name="chat_hint">Escribe un mensaje...</string>
+    <string name="chat_enviar">Enviar</string>
+    <string name="chat_tu">Tu</string>
+    <string name="chat_match">Match</string>
+    <string name="chat_escribiendo">Esta escribiendo...</string>
+    <string name="chat_nuevo_de">Nuevo mensaje de %1$s</string>
+    <string name="chat_nuevos">%1$d nuevos</string>
+    <string name="notification_channel_name">Mensajes de chat</string>
+    <string name="notification_channel_desc">Avisos de nuevos mensajes de tus matches</string>
+    <string name="notification_new_message_title">Nuevo mensaje de %1$s</string>
+    <string name="filtro_matches_todos">Todos</string>
+    <string name="filtro_matches_like">Solo Like</string>
+    <string name="filtro_matches_super_like">Solo Super Like</string>
+    <string name="nav_descubrir">Descubrir</string>
+    <string name="nav_matches">Matches</string>
+    <string name="nav_perfil">Perfil</string>
+    <string name="nav_admin">Admin</string>
+    <string name="titulo_admin">Panel de administrador</string>
+    <string name="admin_info">Gestiona cuentas: eliminar usuarios y cambiar contrasenas.</string>
+    <string name="admin_usuario">Usuario: %1$s</string>
+    <string name="admin_rol_admin">Rol: Administrador</string>
+    <string name="admin_rol_usuario">Rol: Usuario</string>
+    <string name="admin_estado_conectado">Estado: Conectado</string>
+    <string name="admin_estado_desconectado">Estado: Desconectado</string>
+    <string name="admin_estado_bloqueado">Estado: Bloqueado</string>
+    <string name="admin_datos_usuario">%1$s, %2$d anos, %3$s</string>
+    <string name="admin_editar_password">Cambiar contrasena</string>
+    <string name="admin_eliminar_usuario">Eliminar</string>
+    <string name="admin_bloquear_usuario">Bloquear</string>
+    <string name="admin_desbloquear_usuario">Desbloquear</string>
+    <string name="admin_mensaje_privado">Mensaje privado</string>
+    <string name="admin_nueva_password_hint">Nueva contrasena</string>
+    <string name="admin_guardar">Guardar</string>
+    <string name="admin_cancelar">Cancelar</string>
+    <string name="admin_confirmar">Confirmar</string>
+    <string name="admin_password_actualizada">Contrasena actualizada.</string>
+    <string name="admin_usuario_eliminado">Usuario eliminado.</string>
+    <string name="admin_no_eliminar_admin">No se puede eliminar al administrador.</string>
+    <string name="admin_usuario_bloqueado">Usuario bloqueado.</string>
+    <string name="admin_usuario_desbloqueado">Usuario desbloqueado.</string>
+    <string name="admin_mensaje_privado_titulo">Mensaje privado para %1$s</string>
+    <string name="admin_mensaje_privado_hint">Escribe el mensaje privado...</string>
+    <string name="admin_mensaje_enviado">Mensaje privado enviado.</string>
+    <string name="admin_ver_mensajes">Ver mensajes admin</string>
+    <string name="admin_inbox_titulo">Mensajes del administrador</string>
+    <string name="admin_inbox_vacio">No tienes mensajes del administrador.</string>
+    <string name="admin_confirmar_eliminar_titulo">Confirmar eliminacion</string>
+    <string name="admin_confirmar_eliminar_mensaje">Vas a eliminar al usuario %1$s. Esta accion no se puede deshacer.</string>
+    <string name="admin_exportar_usuarios">Exportar usuarios</string>
+    <string name="admin_importar_usuarios">Importar usuarios</string>
+    <string name="admin_export_titulo">Backup de usuarios</string>
+    <string name="admin_import_titulo">Importar backup</string>
+    <string name="admin_backup_hint">Pega aqui el backup exportado.</string>
+    <string name="admin_import_resultado">Usuarios importados/actualizados: %1$d</string>
+    <string name="admin_backup_vacio">No hay backup para importar.</string>
+    <string name="admin_sin_usuarios">No hay usuarios registrados.</string>
+    <string name="admin_filtro_todos">Todos</string>
+    <string name="admin_filtro_conectados">Conectados</string>
+    <string name="admin_filtro_bloqueados">Bloqueados</string>
+    <string name="admin_buscar_email_hint">Buscar por email</string>
+    <string name="admin_prev_page">Anterior</string>
+    <string name="admin_next_page">Siguiente</string>
+    <string name="admin_page_info">Pagina %1$d de %2$d</string>
+    <string name="admin_sort_email_asc">Orden: Email A-Z</string>
+    <string name="admin_sort_email_desc">Orden: Email Z-A</string>
+    <string name="admin_sort_last_seen_desc">Orden: Ultimo acceso reciente</string>
+    <string name="admin_sort_last_seen_asc">Orden: Ultimo acceso antiguo</string>
+    <string name="admin_ver_logs">Ver logs</string>
+    <string name="admin_logs_titulo">Auditoria de admin</string>
+    <string name="admin_logs_vacio">No hay acciones registradas.</string>
+    <string name="admin_log_line">%1$s -> %2$s (%3$s)\n%4$s</string>
+
+    <string-array name="ciudades_filtro">
+        <item>Todas las ciudades</item>
+        <item>Madrid</item>
+        <item>Barcelona</item>
+        <item>Valencia</item>
+        <item>Sevilla</item>
+        <item>Bilbao</item>
+    </string-array>
+
+    <string-array name="filtro_tipo_matches">
+        <item>@string/filtro_matches_todos</item>
+        <item>@string/filtro_matches_like</item>
+        <item>@string/filtro_matches_super_like</item>
+    </string-array>
+
+    <string-array name="filtro_admin_usuarios">
+        <item>@string/admin_filtro_todos</item>
+        <item>@string/admin_filtro_conectados</item>
+        <item>@string/admin_filtro_bloqueados</item>
+    </string-array>
+
+    <string-array name="sort_admin_usuarios">
+        <item>@string/admin_sort_email_asc</item>
+        <item>@string/admin_sort_email_desc</item>
+        <item>@string/admin_sort_last_seen_desc</item>
+        <item>@string/admin_sort_last_seen_asc</item>
+    </string-array>
+</resources>
