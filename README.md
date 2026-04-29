@@ -1,5 +1,12 @@
 # ParejaFinder
 
+![Android](https://img.shields.io/badge/Android-App-3DDC84?logo=android&logoColor=white)
+![Java](https://img.shields.io/badge/Java-11-007396?logo=openjdk&logoColor=white)
+![Gradle](https://img.shields.io/badge/Gradle-Build-02303A?logo=gradle&logoColor=white)
+![License](https://img.shields.io/badge/License-GPLv3-blue.svg)
+![F-Droid Ready](https://img.shields.io/badge/F--Droid-Compatible-orange)
+![Backend](https://img.shields.io/badge/Auth-Backend%20propio-success)
+
 Aplicación Android de demostración para descubrimiento de perfiles, gestión de matches y chat entre usuarios, con un panel de administración incluido.
 
 ## Funcionalidades principales
