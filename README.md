@@ -1,59 +1,89 @@
-# Pareja Finder
+<p align="center">
+  <img src="Logo 512 x 512.png" alt="ParejaFinder logo" width="140" />
+</p>
 
-![Android](https://img.shields.io/badge/Android-App-3DDC84?logo=android&logoColor=white)
-![Java](https://img.shields.io/badge/Java-11-007396?logo=openjdk&logoColor=white)
-![Gradle](https://img.shields.io/badge/Gradle-Build-02303A?logo=gradle&logoColor=white)
-![License](https://img.shields.io/badge/License-GPLv3-blue.svg)
+<h1 align="center">ParejaFinder</h1>
 
-Aplicacion Android de descubrimiento de perfiles, gestion de matches y chat entre usuarios, con panel de administracion.
+<p align="center">
+  Aplicacion Android para descubrimiento de perfiles, gestion de matches y chat entre usuarios.
+</p>
 
-## Funcionalidades
+<p align="center">
+  <img src="https://img.shields.io/badge/Android-App-3DDC84?logo=android&logoColor=white" alt="Android" />
+  <img src="https://img.shields.io/badge/Java-11-007396?logo=openjdk&logoColor=white" alt="Java 11" />
+  <img src="https://img.shields.io/badge/Gradle-Build-02303A?logo=gradle&logoColor=white" alt="Gradle" />
+  <img src="https://img.shields.io/badge/License-GPLv3-blue.svg" alt="GPLv3" />
+  <img src="https://img.shields.io/badge/Auth-Firebase-orange" alt="Firebase Auth" />
+</p>
 
-- Registro/login con email y contrasena (Firebase Auth).
-- Descubrimiento de perfiles con filtros por texto, ciudad y edad.
-- Acciones: `Like`, `Super Like` y `Descartar`.
-- Lista de matches y chat por match.
+Aplicacion Android nativa (Java) para descubrir perfiles, hacer match y chatear, con panel de administracion, almacenamiento local y autenticacion con Firebase.
+
+## Funcionalidades principales
+
+- Registro/login de usuarios con email y contrasena.
+- Descubrimiento de perfiles con filtros (nombre/intereses, ciudad y edad maxima).
+- Acciones de interaccion: `Like`, `Super Like` y `Descartar`.
+- Gestion de matches y chat por match.
+- Perfil de usuario editable (incluye foto de perfil).
 - Notificaciones de nuevos mensajes.
-- Perfil editable (nombre, edad, ciudad, bio y foto).
-- Panel admin con bloqueo, desbloqueo, eliminacion, cambio de contrasena, mensajes privados, backup y logs.
+- Panel de administrador para:
+  - bloqueo/desbloqueo de usuarios,
+  - cambio de contrasena,
+  - eliminacion de cuentas,
+  - mensajeria privada admin-usuario,
+  - exportacion/importacion de usuarios,
+  - visualizacion de logs de auditoria.
 
 ## Stack tecnico
 
 - Android (Java 11)
+- Gradle (AGP 9.x)
 - AndroidX + Material Components
 - Room (persistencia local)
 - Firebase Authentication
 - Google Mobile Ads (AdMob)
-- Gradle / AGP 9.x
 
 ## Requisitos
 
-- Android Studio actualizado.
-- JDK 11.
-- SDK Android (min API 24).
-- `app/google-services.json` valido para Firebase.
+- Android Studio (version reciente con soporte para AGP 9.x)
+- JDK 11
+- SDK de Android (minimo API 24)
+- Archivo `app/google-services.json` valido para Firebase
 
 ## Instalacion y ejecucion
 
-```bash
-git clone https://github.com/Descatron/parejafinder.git
-cd parejafinder
-./gradlew assembleDebug
-```
+1. Clona el repositorio:
+   - `git clone https://github.com/Descatron/parejafinder.git`
+2. Abre el proyecto en Android Studio.
+3. Verifica que `app/google-services.json` este configurado para tu proyecto Firebase.
+4. Sincroniza Gradle.
+5. Ejecuta la app en emulador o dispositivo fisico.
 
-En Windows PowerShell:
+### Compilar desde terminal
 
-```powershell
-.\gradlew.bat assembleDebug
-```
+- Debug APK: `./gradlew assembleDebug`
+- Ejecutar tests unitarios: `./gradlew test`
 
-Luego abre el proyecto en Android Studio y ejecuta en emulador o dispositivo.
+En Windows PowerShell puedes usar `.\gradlew.bat` en lugar de `./gradlew`.
 
-## Estructura
+## Estructura del proyecto
 
-- `app/src/main/java/com/aplicafran/parejafinder/data`: entidades, DAO y repositorio.
-- `app/src/main/java/com/aplicafran/parejafinder/ui`: fragments y adapters.
-- `app/src/main/java/com/aplicafran/parejafinder/MainActivity.java`: flujo principal.
+- `app/src/main/java/com/aplicafran/parejafinder`
+  - `ui/`: fragments y adapters de interfaz
+  - `data/`: entidades, DAOs y repositorio
+  - clases base como `MainActivity`, `SessionManager`, `NotificationHelper`
+- `app/src/main/res`: layouts, menus, drawables y strings
+- `app/src/main/AndroidManifest.xml`: permisos y configuracion de la aplicacion
+
+## Capturas de pantalla
+
+Anade tus imagenes en `docs/images/` y usa una estructura como esta:
+
+![Login](docs/images/login.png)
+![Descubrir](docs/images/discover.png)
+![Matches](docs/images/matches.png)
+![Chat](docs/images/chat.png)
+![Perfil](docs/images/profile.png)
 
 ## Licencia
 
