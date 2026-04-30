@@ -1,0 +1,8 @@
+Pareja Finder es una app Android nativa para descubrir perfiles, crear matches y conversar en chat.
+
+Incluye:
+- Registro e inicio de sesion con email y contrasena.
+- Filtros por nombre/intereses, ciudad y edad maxima.
+- Acciones de Like, Super Like y Descartar.
+- Gestion de matches y conversaciones.
+- Perfil editable y panel de administracion.

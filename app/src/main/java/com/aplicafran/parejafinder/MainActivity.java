@@ -25,10 +25,6 @@ import com.aplicafran.parejafinder.ui.ChatFragment;
 import com.aplicafran.parejafinder.ui.DiscoverFragment;
 import com.aplicafran.parejafinder.ui.MatchesFragment;
 import com.aplicafran.parejafinder.ui.ProfileFragment;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.List;
@@ -49,8 +45,6 @@ public class MainActivity extends AppCompatActivity implements
     private AdminFragment adminFragment;
     private BottomNavigationView bottomNav;
     private TextView tvTopBanner;
-    private AdView adViewBanner;
-    private FirebaseAuth firebaseAuth;
     private int pendingChatCandidateId = -1;
     private String pendingChatCandidateName = "";
 
@@ -61,7 +55,6 @@ public class MainActivity extends AppCompatActivity implements
 
         sessionManager = new SessionManager(this);
         repository = new ProfileRepository(AppDatabase.getInstance(this));
-        firebaseAuth = FirebaseAuth.getInstance();
         NotificationHelper.ensureChannel(this);
         requestNotificationPermissionIfNeeded();
         layoutAuth = findViewById(R.id.layoutAuth);
@@ -69,13 +62,7 @@ public class MainActivity extends AppCompatActivity implements
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
         tvTopBanner = findViewById(R.id.tvTopBanner);
-        adViewBanner = findViewById(R.id.adViewBanner);
         Button btnEntrar = findViewById(R.id.btnEntrar);
-        MobileAds.initialize(this, initializationStatus -> {
-        });
-        if (adViewBanner != null) {
-            adViewBanner.loadAd(new AdRequest.Builder().build());
-        }
         bottomNav = findViewById(R.id.bottomNav);
         bottomNav.inflateMenu(R.menu.bottom_nav_menu);
         bottomNav.setOnItemSelectedListener(item -> {
@@ -115,14 +102,15 @@ public class MainActivity extends AppCompatActivity implements
                 Toast.makeText(this, R.string.error_password_requerida, Toast.LENGTH_SHORT).show();
                 return;
             }
-            loginWithFirebase(email, password);
+            loginOrRegisterLocal(email, password);
         });
 
-        if (firebaseAuth.getCurrentUser() != null && firebaseAuth.getCurrentUser().getEmail() != null) {
-            String email = firebaseAuth.getCurrentUser().getEmail();
+        if (sessionManager.isLoggedIn() && sessionManager.getEmail() != null && !sessionManager.getEmail().trim().isEmpty()) {
+            String email = sessionManager.getEmail();
             UserAccount account = repository.getUserProfile(email);
             if (account != null && account.isBlocked == 1) {
-                firebaseAuth.signOut();
+                repository.setUserOnlineStatus(email, false);
+                sessionManager.logout();
                 Toast.makeText(this, R.string.error_usuario_bloqueado, Toast.LENGTH_SHORT).show();
                 showAuthArea();
                 parseNotificationIntent(getIntent());
@@ -235,7 +223,6 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void logout() {
         repository.setUserOnlineStatus(sessionManager.getEmail(), false);
-        firebaseAuth.signOut();
         sessionManager.logout();
         etEmail.setText("");
         etPassword.setText("");
@@ -331,33 +318,22 @@ public class MainActivity extends AppCompatActivity implements
         return email.contains("@") && email.contains(".") && email.length() >= 6;
     }
 
-    private void loginWithFirebase(String email, String password) {
-        firebaseAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, signInTask -> {
-                    if (signInTask.isSuccessful()) {
-                        onAuthenticationSuccess(email, password, false);
-                        return;
-                    }
-                    firebaseAuth.createUserWithEmailAndPassword(email, password)
-                            .addOnCompleteListener(this, signUpTask -> {
-                                if (signUpTask.isSuccessful()) {
-                                    onAuthenticationSuccess(email, password, true);
-                                } else {
-                                    Toast.makeText(this, R.string.error_credenciales_invalidas, Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                });
+    private void loginOrRegisterLocal(String email, String password) {
+        ProfileRepository.AuthResult authResult = repository.authenticate(email, password);
+        if (authResult == ProfileRepository.AuthResult.LOGIN_SUCCESS) {
+            onAuthenticationSuccess(email, false);
+            return;
+        }
+        if (authResult == ProfileRepository.AuthResult.REGISTERED_SUCCESS) {
+            onAuthenticationSuccess(email, true);
+            return;
+        }
+        Toast.makeText(this, R.string.error_credenciales_invalidas, Toast.LENGTH_SHORT).show();
     }
 
-    private void onAuthenticationSuccess(String email, String password, boolean justRegistered) {
-        repository.upsertLocalUserAccount(
-                email,
-                password,
-                ProfileRepository.ADMIN_EMAIL.equalsIgnoreCase(email)
-        );
+    private void onAuthenticationSuccess(String email, boolean justRegistered) {
         UserAccount account = repository.getUserProfile(email);
         if (account != null && account.isBlocked == 1) {
-            firebaseAuth.signOut();
             Toast.makeText(this, R.string.error_usuario_bloqueado, Toast.LENGTH_SHORT).show();
             return;
         }

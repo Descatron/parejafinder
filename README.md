@@ -13,10 +13,9 @@
   <img src="https://img.shields.io/badge/Java-11-007396?logo=openjdk&logoColor=white" alt="Java 11" />
   <img src="https://img.shields.io/badge/Gradle-Build-02303A?logo=gradle&logoColor=white" alt="Gradle" />
   <img src="https://img.shields.io/badge/License-GPLv3-blue.svg" alt="GPLv3" />
-  <img src="https://img.shields.io/badge/Auth-Firebase-orange" alt="Firebase Auth" />
 </p>
 
-Aplicacion Android nativa (Java) para descubrir perfiles, hacer match y chatear, con panel de administracion, almacenamiento local y autenticacion con Firebase.
+Aplicacion Android nativa (Java) para descubrir perfiles, hacer match y chatear, con panel de administracion y almacenamiento local.
 
 ## Funcionalidades principales
 
@@ -40,24 +39,20 @@ Aplicacion Android nativa (Java) para descubrir perfiles, hacer match y chatear,
 - Gradle (AGP 9.x)
 - AndroidX + Material Components
 - Room (persistencia local)
-- Firebase Authentication
-- Google Mobile Ads (AdMob)
 
 ## Requisitos
 
 - Android Studio (version reciente con soporte para AGP 9.x)
 - JDK 11
 - SDK de Android (minimo API 24)
-- Archivo `app/google-services.json` valido para Firebase
 
 ## Instalacion y ejecucion
 
 1. Clona el repositorio:
    - `git clone https://github.com/Descatron/parejafinder.git`
 2. Abre el proyecto en Android Studio.
-3. Verifica que `app/google-services.json` este configurado para tu proyecto Firebase.
-4. Sincroniza Gradle.
-5. Ejecuta la app en emulador o dispositivo fisico.
+3. Sincroniza Gradle.
+4. Ejecuta la app en emulador o dispositivo fisico.
 
 ### Compilar desde terminal
 

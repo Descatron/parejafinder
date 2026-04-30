@@ -5,8 +5,6 @@
     <string name="auth_hint_password">Contrasena</string>
     <string name="auth_entrar">Entrar / Registrarme</string>
     <string name="copyright_login">© 2026 Aplicafran. Todos los derechos reservados.</string>
-    <string name="admob_app_id">ca-app-pub-1808401817976022~7370928010</string>
-    <string name="admob_banner_unit_id">ca-app-pub-1808401817976022/6879453901</string>
     <string name="error_email_requerido">Escribe un email valido.</string>
     <string name="error_password_requerida">La contrasena debe tener al menos 6 caracteres.</string>
     <string name="error_credenciales_invalidas">Email o contrasena incorrectos.</string>
